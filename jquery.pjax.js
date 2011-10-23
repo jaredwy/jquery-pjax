@@ -105,8 +105,8 @@ var pjax = $.pjax = function( options ) {
       else
         return window.location = options.url
       } else if ( options.template ) {
-        data = options.template()
-      } else 
+        data = options.template(data)
+      } else  {
         // If we got no data or an entire web page, go directly
         // to the page and let normal error handling happen.
         if ( !$.trim(data) || /<html/i.test(data) )
