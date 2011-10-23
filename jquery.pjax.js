@@ -104,12 +104,14 @@ var pjax = $.pjax = function( options ) {
         data = $fragment.children()
       else
         return window.location = options.url
-    } else {
+      } else if ( options.template ) {
+        data = options.template()
+      } else 
         // If we got no data or an entire web page, go directly
         // to the page and let normal error handling happen.
         if ( !$.trim(data) || /<html/i.test(data) )
           return window.location = options.url
-    }
+      }
 
     // Make it happen.
     this.html(data)
