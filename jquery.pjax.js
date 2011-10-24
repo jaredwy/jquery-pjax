@@ -43,7 +43,7 @@ $.fn.pjax = function( container, options ) {
       return true
 
     var defaults = {
-      url: options.baseURL + this.href,
+      url: this.href,
       container: $(this).attr('data-pjax'),
       clickedElement: $(this),
       fragment: null
@@ -90,7 +90,7 @@ var pjax = $.pjax = function( options ) {
   options = $.extend(true, {}, pjax.defaults, options)
 
   if ( $.isFunction(options.url) ) {
-    options.url = options.url()
+    options.url = options.url(options.clickedElement)
   }
 
   options.context = $container
@@ -191,7 +191,6 @@ pjax.defaults = {
   data: { _pjax: true },
   type: 'GET',
   dataType: 'html',
-  baseURL: '',
   beforeSend: function(xhr){
     this.trigger('pjax:start', [xhr, pjax.options])
     // start.pjax is deprecated
